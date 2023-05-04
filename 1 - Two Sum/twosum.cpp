@@ -1,3 +1,16 @@
+/* 
+ * Author: Ember Hext
+ * Problem: Two Sum
+ * Link: https://leetcode.com/problems/two-sum/
+ * 
+ * This solution uses a hash map, storing the number as the key
+ * and the index as the value. This order is used because it allows
+ * us to check if the number needed to sum to the target has already
+ * been inserted into the hash map.
+ * 
+ * This solution works in O(n) time.
+ */
+
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -17,7 +30,7 @@ public:
         }
 
         // The problem specification indicates that there will always be a working pair
-        // However, we 
+        // But typically this would be our failure state
         return { -1, -1 };
     }
 };
