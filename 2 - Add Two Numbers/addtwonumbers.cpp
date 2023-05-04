@@ -12,71 +12,71 @@
  */
 
 class Solution {
-public:
-    ListNode* addTwoNumebrs(ListNode* l1, ListNode* l2) {
-        ListNode *result =  l1, *prev;              // We store the head of l1 into the result to return it at the end
+    public:
+        ListNode* addTwoNumbers(ListNode* list1, ListNode* list2) {
+        ListNode *result = list1, *previousNode;    // We store the head of list1 into the result to return it at the end
                                                     // We need to track the previous node in case we end up with a carry-over at the very end
-        int sum;                                    
-        int carry = 0;
+        int currentSum;
+        int carryOver = 0;
         
-        while (l1 && l2) {                          // while l1 and l2 are not null, we loop through summing them
-            sum = l1->val + l2->val + carry;
+            while (list1 && list2) {                    // while list1 and list2 are not null, we loop through summing them
+            currentSum = list1->val + list2->val + carryOver;
 
-            if (sum > 9) {                          // if the sum is two digits, we need to carry one over
-                carry = 1;
-                l1-> val = sum - 10;
+            if (currentSum > 9) {                   // if the sum is two digits, we need to carry one over
+                carryOver = 1;
+                list1->val = currentSum - 10;
             } else {                                // otherwise we can just store it
-                carry = 0;
-                l1 -> val = sum;
+                carryOver = 0;
+                list1->val = currentSum;
             }
 
-            prev = l1;
-            l1 = l1->next;
-            l2 = l2->next;
+            previousNode = list1;
+            list1 = list1->next;
+            list2 = list2->next;
         }
 
-        if (!carry) {                               // if there is no carry over, we can tack on any remaining digits
-            prev -> next = l1 ? l1 : l2;
-            return ans;                             // and finish
+        if (!carryOver) {                           // if there is no carry over, we can tack on any remaining digits
+            previousNode->next = list1 ? list1 : list2;
+            return result;                          // and finish
         }
 
-        prev->next = l1 ? l1 : l2;                  // otherwise need to continue the process manually to add the
+        previousNode->next = list1 ? list1 : list2; // otherwise need to continue the process manually to add the
                                                     // carry over(s) manually
-        while (l1) {
-            int sum = l1->val + carry;
+        while (list1) {
+            currentSum = list1->val + carryOver;
 
-            if (sum > 9) {
-                carry = 1;
-                l1->val = sum-10;
+            if (currentSum > 9) {
+                carryOver = 1;
+                list1->val = currentSum - 10;
             } else {
-                carry = 0;
-                l1->val = sum;
+                carryOver = 0;
+                list1->val = currentSum;
             }
 
-            prev = l1;
-            l1 = l1-> next;
+            previousNode = list1;
+            list1 = list1->next;
         }
         
-        while (l2) {
-            int sum = l2->val + carry;
+        while (list2) {
+            currentSum = list2->val + carryOver;
 
-            if (sum > 9) {
-                carry = 1;
-                l2->val = sum-10;
+            if (currentSum > 9) {
+                carryOver = 1;
+                list2->val = currentSum - 10;
             } else {
-                carry = 0;
-                l2->val = sum;
+                carryOver = 0;
+                list2->val = currentSum;
             }
 
-            prev = l2;
-            l2 = l2-> next;
+            previousNode = list2;
+            list2 = list2->next;
         }
 
-        if (carry) {
-            ListNode *node = new ListNode(carry);
-            prev->next = node;
+        if (carryOver) {
+            ListNode *carryNode = new ListNode(carryOver);
+            previousNode->next = carryNode;
         }
 
-        return ans;                                 // and then return
+        return result;                              // and then return
     }
-}
+};
