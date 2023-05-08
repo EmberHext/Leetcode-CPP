@@ -13,6 +13,11 @@
  * the center is a character, and another for even length palindromes, where the 
  * center is between two characters. For each iteration, it updates the longest 
  * palindrome found accordingly.
+ *
+ * Each phase of this solution is greedy, which I found to be faster than the dynamic
+ * programming solution or other alternatives. It is also memory efficient, since 
+ * it only stores the longest palindrome found so far, rather than keeping track of all 
+ * substrings.
  * 
  * This solution works in O(n^2) time, where n is the length of the input string,
  * since for each character, it may expand outwards up to n/2 times.
